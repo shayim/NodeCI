@@ -1,4 +1,5 @@
 const passport = require('passport');
+const {clearCache} = require('../services/cache')
 
 module.exports = app => {
   app.get(
@@ -17,6 +18,7 @@ module.exports = app => {
   );
 
   app.get('/auth/logout', (req, res) => {
+    clearCache(req.user.id)
     req.logout();
     res.redirect('/');
   });
